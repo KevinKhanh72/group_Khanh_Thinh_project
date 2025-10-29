@@ -1,17 +1,17 @@
-// src/AddUser.jsx
 import { useState } from "react";
-import { useUsers } from "./UsersContext";
+import { useUsers } from "./UsersContext.jsx";
 
-const emailRegex = /\S+@\S+\.\S+/;
+const emailRegex = /\S+@\S+\.\S+/; // Regular expression for email validation
 
 export default function AddUser() {
-  const { addUser } = useUsers();
+  const { addUser, fetchUsers } = useUsers();
+
   const [form, setForm] = useState({ name: "", email: "" });
   const [errors, setErrors] = useState({ name: "", email: "" });
   const [saving, setSaving] = useState(false);
   const [serverMsg, setServerMsg] = useState("");
 
-  const onChange = (e) => {
+  const onchange = (e) => {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
     setErrors((err) => ({ ...err, [name]: "" }));
@@ -34,11 +34,13 @@ export default function AddUser() {
 
     try {
       setSaving(true);
-      await addUser({ name: form.name.trim(), email: form.email.trim() });
+      await createUser({ name: form.name.trim(), email: form.email.trim() });
+      // Đồng bộ lại danh sách từ server để tránh bất đồng bộ
+      if (typeof fetchUsers === "function") await fetchUsers();
       setForm({ name: "", email: "" });
-      setServerMsg("✅ Thêm user thành công!");
-    } catch (e) {
-      setServerMsg(e?.response?.data?.message || e.message || "Có lỗi xảy ra!");
+      setServerMsg("Thêm user thành công!");
+    } catch {
+      setServerMsg("Có lỗi khi tạo user");
     } finally {
       setSaving(false);
     }
@@ -47,39 +49,33 @@ export default function AddUser() {
   return (
     <div className="card">
       <h2>Thêm User</h2>
-      <form className="form" onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit}>
         <label>
           Tên
           <input
             name="name"
-            placeholder="VD: Nguyen Van A"
             value={form.name}
-            onChange={onChange}
+            onChange={onchange}
+            placeholder="Nhập tên"
           />
-          {errors.name && <div className="error">{errors.name}</div>}
+          {errors.name && <span className="error">{errors.name}</span>}
         </label>
 
         <label>
           Email
           <input
             name="email"
-            type="email"
-            placeholder="VD: a@example.com"
             value={form.email}
-            onChange={onChange}
+            onChange={onchange}
+            placeholder="email@example.com"
           />
-          {errors.email && <div className="error">{errors.email}</div>}
+          {errors.email && <span className="error">{errors.email}</span>}
         </label>
-
-        {serverMsg && (
-          <div className="error" style={{ background: "#ecfeff", borderColor: "#a5f3fc" }}>
-            {serverMsg}
-          </div>
-        )}
 
         <button type="submit" disabled={saving}>
           {saving ? "Đang lưu..." : "Thêm"}
         </button>
+        {serverMsg && <div className="note">{serverMsg}</div>}
       </form>
     </div>
   );
