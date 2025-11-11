@@ -29,9 +29,11 @@ exports.login = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ msg: "Sai mật khẩu" });
 
-    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
+   const token = jwt.sign(
+  { id: user._id }, // 👈 phải có id ở đây
+  process.env.JWT_SECRET,
+  { expiresIn: "7d" }
+);
 
     res.json({ msg: "Đăng nhập thành công", token });
   } catch (err) {
