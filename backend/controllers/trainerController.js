@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-exports.getAllTrainers = async (req, res) => {
+exports.getAllTrainers = async (req, res) =>  {
   try {
     const { specialty, city, district, gender } = req.query;
 
