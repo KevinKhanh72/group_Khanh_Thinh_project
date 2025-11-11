@@ -1,12 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const userController = require("../controllers/userController");
 
-// Route GET /api/users
-router.get('/users', (req, res) => {
-  res.json([  // Trả về mảng người dùng
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Doe', email: 'jane@example.com' }
-  ]);
-});
+// 📋 Lấy danh sách người dùng
+router.get("/", userController.getUsers);
+
+// ➕ Thêm người dùng
+router.post("/", userController.createUser);
+
+// 🗑️ Xóa người dùng
+router.delete("/:id", userController.deleteUser);
+
+// 🛠️ Cập nhật role người dùng
+router.put("/:id/role", userController.updateUserRole);
 
 module.exports = router;
