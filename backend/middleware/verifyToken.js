@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = (req, res, next) =>  {
+module.exports = (req, res, next) => git; {
   const authHeader = req.header("Authorization");
   if (!authHeader) return res.status(401).json({ msg: "Không có token, truy cập bị từ chối!" });
 

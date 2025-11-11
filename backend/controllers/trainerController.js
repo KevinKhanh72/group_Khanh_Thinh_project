@@ -14,7 +14,7 @@ exports.getAllTrainers = async (req, res) =>
 
     const trainers = await User.find(filter).select('-password');
     res.status(200).json(trainers);
-  } catch (error) {
+  } catch (error)  {
     res.status(500).json({ message: 'Lỗi khi lấy danh sách huấn luyện viên', error });
   }
 };
