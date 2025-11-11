@@ -1,11 +1,12 @@
 const User = require('../models/User');
 
-exports.getAllTrainers = async (req, res) =>  {
+exports.getAllTrainers = async (req, res) => 
+{
   try {
     const { specialty, city, district, gender } = req.query;
 
     // Tạo điều kiện lọc linh hoạt
-    const filter = { role: 'trainer' };
+    const filter = { role: 'trainer' }; 
     if (specialty) filter.specialty = specialty;
     if (city) filter.city = city;
     if (district) filter.district = district;
