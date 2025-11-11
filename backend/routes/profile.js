@@ -14,7 +14,7 @@ router.get("/", verifyToken, async (req, res) => {
   }
 });
 
-// 🛠 PUT /api/profile → Cập nhật thông tin
+// 🛠 PUT /api/profile →   Cập nhật thông tin
 router.put("/", verifyToken, async (req, res) => {
   try {
     const { name, gender, city, bio, avatar } = req.body;
