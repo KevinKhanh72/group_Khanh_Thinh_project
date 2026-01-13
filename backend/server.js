@@ -17,9 +17,9 @@ const profileRoutes = require("./routes/profile");
 
 // ================== USE ROUTES ================== //
 app.use('/api/users', userRoutes);      // Quản lý người dùng
-app.use('/api/auth', authRoutes);       // Đăng ký / Đăng nhập
-app.use('/api/trainers', trainerRoutes); // Quản lý huấn luyện viên
-app.use("/api/profile", profileRoutes);
+// app.use('/api/auth', authRoutes);       // Comment out for demo
+// app.use('/api/trainers', trainerRoutes); // Comment out for demo
+// app.use("/api/profile", profileRoutes); // Comment out for demo
 
 
 // ================== DATABASE CONNECT ================== //
