@@ -1,53 +1,57 @@
-# Getting Started with Create React App
+# Group Khanh Thinh Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dự án full-stack quản lý người dùng với React (frontend) và Node.js/Express (backend).
 
-## Available Scripts
+## Cấu trúc dự án
+- `backend/`: Server Node.js với Express, MongoDB (tùy chọn), JWT auth.
+- `src/`: Frontend React app.
 
-In the project directory, you can run:
+## Setup và Chạy
 
-### `npm start`
+### 1. Clone repo
+```bash
+git clone <repo-url>
+cd group_Khanh_Thinh_project
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. Cài dependencies
+```bash
+# Frontend
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Backend
+cd backend
+npm install
+cd ..
+```
 
-### `npm test`
+### 3. Cấu hình environment (tùy chọn)
+- Copy `backend/.env.example` thành `backend/.env`
+- Điền thông tin MongoDB và JWT_SECRET nếu cần.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+*Lưu ý: Dự án demo dùng in-memory storage, không cần MongoDB.*
 
-### `npm run build`
+### 4. Chạy ứng dụng
+```bash
+# Terminal 1: Backend
+cd backend
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Terminal 2: Frontend
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Mở [http://localhost:3000](http://localhost:3000) để xem app.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## API Endpoints
+- `GET /api/users`: Lấy danh sách user
+- `POST /api/users`: Thêm user (body: {name, email})
+- `DELETE /api/users/:id`: Xóa user
+- `PUT /api/users/:id/role`: Cập nhật role
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Công nghệ sử dụng
+- Frontend: React, Axios
+- Backend: Node.js, Express, JWT, MongoDB (optional)(https://facebook.github.io/create-react-app/docs/code-splitting)
 
 ### Analyzing the Bundle Size
 

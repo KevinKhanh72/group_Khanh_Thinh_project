@@ -1,2 +1,2 @@
 node_modules/
-.env
+# .env  # Uncomment if you want to commit .env for demo
