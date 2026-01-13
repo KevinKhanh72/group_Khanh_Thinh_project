@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../api"; // đã tạo src/api.js
+import api from "./api"; // đã tạo src/api.js
 
 export default function UserList({ reloadKey }) {
   const [users, setUsers] = useState([]);
@@ -13,7 +13,7 @@ export default function UserList({ reloadKey }) {
       setLoading(true);
       setErr("");
       try {
-        const res = await api.get("/users"); // GET http://localhost:3000/users
+        const res = await api.get("/api/users"); // GET http://localhost:5000/api/users
         if (!cancel) setUsers(res.data || []);
       } catch (e) {
         setErr(e?.response?.data?.message || e.message || "Fetch users failed");

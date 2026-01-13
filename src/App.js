@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import AddUser from './AddUser';
+import UserList from './UserList';
 
 function App() {
+  const [reloadKey, setReloadKey] = useState(0);
+
+  const handleUserAdded = () => {
+    setReloadKey(prev => prev + 1);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Quản lý Người dùng</h1>
+      <AddUser onUserAdded={handleUserAdded} />
+      <UserList reloadKey={reloadKey} />
     </div>
   );
 }
